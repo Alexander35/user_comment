@@ -17,3 +17,16 @@ def main(request):
                 'title' : 'Main',        
             }
         )
+
+@login_required
+def new_comment(request):
+
+	# project = Project.objects.get(pk=project_id)
+
+	return render(
+            request,
+            'new_comment.html',
+            { 
+                'title' : 'Создать Комент',        
+            }
+        )	

@@ -5,4 +5,6 @@ from . import views
 urlpatterns = [
 	path('', RedirectView.as_view(url='main/')),
 	path('main/', views.main, name="main"),
+	path('comment/', views.new_comment, name="new_comment"),
+
 ]

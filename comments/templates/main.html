@@ -1,1 +1,44 @@
-main.html
+{% extends "general.html" %}
+
+{% block header %}
+
+{% include "header.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Список Комментариев Пользователей</h1>
+
+  <p class="lead">
+    На этой странице выводится список всех комментариев от всех пользователей.
+  </p>
+  <hr class="my-4">
+
+  <p class="lead">
+  	<i class="material-icons">account_circle</i>
+    ФИО пользователя
+  </p>
+
+  <p class="lead">
+  	<i class="material-icons">contacts</i>
+    емайл, телефон
+  </p>
+
+  <p class="lead">
+  	<i class="material-icons">location_city</i>
+    Регион, Город
+  </p>
+
+  <p class="lead">
+  	<i class="material-icons">description</i>
+    Коментарий
+  </p>
+  <hr class="my-4"> 
+  <p class="lead">
+    <a type="button" href="{% url 'new_comment' %}" class="btn btn-success">Создать Коментарий</a>
+  </p> 
+</div>  
+
+{% endblock %}
