@@ -1,3 +1,7 @@
+from django import forms
+from django.contrib.auth.models import User
+from .models import Comment, Region, Town
+
 class NewCommentForm(forms.Form):
 
     user_name = forms.CharField(
@@ -39,12 +43,11 @@ class NewCommentForm(forms.Form):
                 'class': 'form-control',
                 'placeholder': 'Регион',
                 'type': 'text',
-
-
             }),
         label='Регион', max_length=100)    
 
     town = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',

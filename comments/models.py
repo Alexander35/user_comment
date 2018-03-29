@@ -23,14 +23,14 @@ REGIONS = (
 
 class Town(models.Model):
 
-	name = models.CharField(max_length=100, choices=TOWNS, default=1)
+	name = models.CharField(max_length=100, choices=TOWNS, default=1, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.name)	
 
 class Region(models.Model):
 
-	name = models.CharField(max_length=100, choices=REGIONS, default=1)
+	name = models.CharField(max_length=100, choices=REGIONS, default=1, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.name)	
@@ -38,10 +38,10 @@ class Region(models.Model):
 class Comment(models.Model):
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-	region = models.ForeignKey('Region', on_delete=models.SET_NULL, null=True)
-	town = models.ForeignKey('Town', on_delete=models.SET_NULL, null=True)
-	patronomic = models.CharField(max_length=100, null=True)
-	tel = models.CharField(max_length=100, null=True)
+	region = models.ForeignKey('Region', on_delete=models.SET_NULL, null=True, blank=True)
+	town = models.ForeignKey('Town', on_delete=models.SET_NULL, null=True, blank=True)
+	patronomic = models.CharField(max_length=100, null=True, blank=True)
+	tel = models.CharField(max_length=100, null=True, blank=True)
 	comment = models.CharField(max_length=1000, null=False)
 	created_at = models.DateTimeField(auto_now_add=True, null=True)
 	updated_at = models.DateTimeField(auto_now=True, null=True)	
