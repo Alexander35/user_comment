@@ -11,6 +11,7 @@ class NewCommentForm(forms.Form):
                 'placeholder': 'Имя',
                 'type': 'text',
                 'required': 'true',
+                # 'value' : 
 
             }),
         label='Имя', max_length=100)  
@@ -27,38 +28,32 @@ class NewCommentForm(forms.Form):
         label='Фамилия', max_length=100)    
 
     patronomic = forms.CharField(
+    	required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Отчество',
                 'type': 'text',
-                'required': 'true',
 
             }),
-        label='Отчество', max_length=100)   
+        label='Отчество', max_length=100)
 
-    region = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Регион',
-                'type': 'text',
-            }),
-        label='Регион', max_length=100)    
+    region = forms.ModelChoiceField(
+    	required=False,
+    	queryset=Region.objects.all(),
+    	empty_label="/Выберите Регион/",
+		widget=forms.Select(attrs={'class': 'form-control'})     	
+    	)
 
-    town = forms.CharField(
-        required=False,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Город',
-                'type': 'text',
-
-
-            }),
-        label='Город', max_length=100)      
+    town = forms.ModelChoiceField(
+    	required=False,
+    	queryset=Town.objects.all(),
+    	empty_label="/Выберите Город/",
+    	widget=forms.Select(attrs={'class': 'form-control'})   	
+    	)    		       
 
     phone = forms.CharField(
+    	required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
@@ -70,13 +65,13 @@ class NewCommentForm(forms.Form):
         label='Контактный Телефон', max_length=100)                                    
 
     email = forms.EmailField(
+    	required=False,
     	widget=forms.TextInput(
     		attrs={
     				'class': 'form-control', 
     				'aria-describedby': 'emailHelp',
     				'placeholder': 'Enter Email',
     				'type': 'email',
-    				'required': 'true',
     			}),
     	label='Email address', max_length=100)
 

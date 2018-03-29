@@ -16,29 +16,36 @@
   </p>
   <hr class="my-4">
 
+  {% for comment in comments %}
   <p class="lead">
   	<i class="material-icons">account_circle</i>
-    ФИО пользователя
+    {{ comment.user_name }}, {{ comment.user_family_name }}, {{ comment.patronomic }}
   </p>
 
   <p class="lead">
   	<i class="material-icons">contacts</i>
-    емайл, телефон
+    {{comment.email }}, {{ comment.phone}} 
   </p>
 
   <p class="lead">
   	<i class="material-icons">location_city</i>
-    Регион, Город
+  	{{ comment.region }},  {{ comment.town }}
   </p>
 
   <p class="lead">
   	<i class="material-icons">description</i>
-    Коментарий
+    {{ comment.comment }}
   </p>
+  {% if user.username == comment.user.username  or request.user.is_staff %}	
+  <p class="lead">
+    <a type="button" href="{% url 'del_comment' comment.id %}" class="btn btn-danger">Удалить Коментарий</a>
+  </p>   
+  {% endif %}
   <hr class="my-4"> 
+  {% endfor %}
   <p class="lead">
     <a type="button" href="{% url 'new_comment' %}" class="btn btn-success">Создать Коментарий</a>
-  </p> 
+  </p>   
 </div>  
 
 {% endblock %}
