@@ -132,11 +132,18 @@ def new_comment(request):
 	new_comment_form = NewCommentForm()
 
 	if request.method == 'POST':
+		print('POST')
 		new_comment_form = NewCommentForm(request.POST)
 		if new_comment_form.is_valid():
 			try:
-				region = Region.objects.get(pk=request.POST['region'])
-				town = Town.objects.get(pk=request.POST['town'])
+				try:
+					region = Region.objects.get(pk=request.POST['region'])
+				except Exception as exc:
+					region = None 
+				try:	
+					town = Town.objects.get(pk=request.POST['town'])
+				except Exception as exc:
+					town = None	
 				comment = Comment(
 	    			user_name=request.POST['user_name'],
 	    			user_family_name=request.POST['user_family_name'],

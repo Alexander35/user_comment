@@ -29,7 +29,9 @@
 
   <p class="lead">
   	<i class="material-icons">location_city</i>
-  	{{ comment.region }},  {{ comment.town }}
+    {% if comment.region and comment.town %}
+    	{{ comment.region }},  {{ comment.town }}
+    {% endif %}
   </p>
 
   <p class="lead">
