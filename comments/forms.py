@@ -53,8 +53,9 @@ class NewCommentForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Контактный Телефон',
-                'type': 'text',
+                'placeholder': 'Телефон (555)555-55-55',
+                'type': 'tel',
+                'pattern': '\(\d{3}\)\d{3}-\d{2}-\d{2}'
             }),
         label='Контактный Телефон', max_length=100)                                    
 
