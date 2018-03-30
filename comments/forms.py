@@ -11,8 +11,6 @@ class NewCommentForm(forms.Form):
                 'placeholder': 'Имя',
                 'type': 'text',
                 'required': 'true',
-                # 'value' : 
-
             }),
         label='Имя', max_length=100)  
 
@@ -23,7 +21,6 @@ class NewCommentForm(forms.Form):
                 'placeholder': 'Фамилия',
                 'type': 'text',
                 'required': 'true',
-
             }),
         label='Фамилия', max_length=100)    
 
@@ -34,7 +31,6 @@ class NewCommentForm(forms.Form):
                 'class': 'form-control',
                 'placeholder': 'Отчество',
                 'type': 'text',
-
             }),
         label='Отчество', max_length=100)
 
@@ -59,8 +55,6 @@ class NewCommentForm(forms.Form):
                 'class': 'form-control',
                 'placeholder': 'Контактный Телефон',
                 'type': 'text',
-
-
             }),
         label='Контактный Телефон', max_length=100)                                    
 
@@ -81,7 +75,5 @@ class NewCommentForm(forms.Form):
                 'class': 'form-control',
                 'placeholder': 'Коментарий',
                 'type': 'text',
-
-
             }),
         label='Коментарий', max_length=1000)       

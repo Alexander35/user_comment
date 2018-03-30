@@ -1,0 +1,55 @@
+{% extends "general.html" %}
+
+{% block header %}
+
+{% include "header.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Статистика По Регионам</h1>
+
+  <p class="lead">
+    На этой странице выводится статистика по количеству сообщений от регионов.
+  </p>
+  <hr class="my-4">
+  {% for region, stat in region_stats_leaders %}
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Регион</th>
+          <th scope="col">Количество коментариев</th>
+          <th scope="col"></th>          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><i class="material-icons">public</i></th>
+          <td>{{ region }}</td>
+          <td>{{ stat }}</td>
+          <td><a href="{% url 'towns_stat' region.id %}" type="button" class="btn btn-primary" > Статистика Региона </a>
+          </td>
+        </tr>
+
+  {% endfor %} 
+
+  {% for region, stat in region_stats %}
+          <th scope="row"><i class="material-icons">public</i></th>
+          <td>{{ region }}</td>
+          <td>{{ stat }}</td>
+          <td><a href="{% url 'towns_stat' region.id %}" type="button" class="btn btn-primary" > Статистика Региона </a>
+          </td>
+        </tr>
+  {% endfor %} 
+     
+      </tbody>
+    </table>
+  </div>   
+</div>  
+
+{% endblock %}

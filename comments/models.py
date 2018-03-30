@@ -36,6 +36,14 @@ class Region(models.Model):
 	def __str__(self):
 		return '{}'.format(self.name)	
 
+class CommentStat(models.Model):
+	region = models.ForeignKey('Region', on_delete=models.SET_NULL, null=True, blank=True)
+	town = models.ForeignKey('Town', on_delete=models.SET_NULL, null=True, blank=True)
+	comment_num = models.IntegerField(null=True, blank=True, default=0)
+
+	def __str__(self):
+		return '{} :: {} :: {}'.format(self.region, self.town, self.comment_num)
+
 class Comment(models.Model):
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default=None)

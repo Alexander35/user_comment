@@ -1,0 +1,41 @@
+{% extends "general.html" %}
+
+{% block header %}
+
+{% include "header.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Статистика По Региону</h1>
+
+  <p class="lead">
+    На этой странице выводится статистика по количеству сообщений от региона.
+  </p>
+  <hr class="my-4">
+  {% for town, stat in towns_stats %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Город</th>
+          <th scope="col">Количество коментариев</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><i class="material-icons">location_city</i></th>
+          <td>{{ town }}</td>
+          <td>{{ stat }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>          
+
+  {% endfor %}
+</div>  
+
+{% endblock %}
