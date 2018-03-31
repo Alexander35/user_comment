@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from .forms import NewCommentForm
 from .models import Comment, Region, Town, CommentStat
+from django.http import HttpResponse
 
 # Create your views here.
 @login_required
@@ -24,21 +26,31 @@ def get_region_comment_status(region):
 	counter = 0
 	comment_stats = CommentStat.objects.filter(region=region)
 	counter = sum([comment_stat.comment_num for comment_stat in comment_stats])
-	# print('counter {}'.format( counter))
 	return counter
 
 def get_town_comment_status(town):
 	counter = 0
 	comment_stats = CommentStat.objects.filter(town=town)
 	counter = sum([comment_stat.comment_num for comment_stat in comment_stats])
-	# print('counter {}'.format( counter))
 	return counter
 
 @login_required
+def get_towns_list(request):
+	try:
+		if request.method == 'GET':
+			town_list = Town.objects.filter(region__id=request.GET['region_id'])
+			html = ["<option value='{}'>{}</option>".format(town.id, town.name) for town in town_list]
+			return HttpResponse(html, content_type='text/html')
+
+		return HttpResponse('None', content_type='text/html')	
+	except Exception as exc:
+		print('unable to fetch towns list: {}'.format(exc))
+		return HttpResponse('None', content_type='text/html')	
+
+@staff_member_required
 def towns_stat(request, region_id):
 	try:
 		towns = Town.objects.filter(region__id=region_id)
-		print(towns)
 		towns_stats = []
 		for town in towns:
 			towns_stats.append((town, get_town_comment_status(town)))	
@@ -55,7 +67,7 @@ def towns_stat(request, region_id):
 	except Exception as exc:
 		print('towns stats error : {}'.format(exc))
 
-@login_required
+@staff_member_required
 def regions_stat(request):
 
 	try:
@@ -128,11 +140,16 @@ def dec_stat(region, town):
 
 @login_required
 def new_comment(request):
+	# if request.metgod == 
+
+	# request.GET['user_name'] = request.user
 
 	new_comment_form = NewCommentForm()
+	new_comment_form.fields['user_name'].initial = request.user.first_name
+	new_comment_form.fields['user_family_name'].initial = request.user.last_name
+	new_comment_form.fields['email'].initial = request.user.email
 
 	if request.method == 'POST':
-		print('POST')
 		new_comment_form = NewCommentForm(request.POST)
 		if new_comment_form.is_valid():
 			try:

@@ -15,7 +15,7 @@
     На этой странице выводится статистика по количеству сообщений от региона.
   </p>
   <hr class="my-4">
-  {% for town, stat in towns_stats %}
+
   <div class="table-responsive">
     <table class="table">
       <thead class="thead-light">
@@ -26,16 +26,18 @@
         </tr>
       </thead>
       <tbody>
+    {% for town, stat in towns_stats %}    
         <tr>
           <th scope="row"><i class="material-icons">location_city</i></th>
           <td>{{ town }}</td>
           <td>{{ stat }}</td>
         </tr>
+      {% endfor %}    
       </tbody>
     </table>
   </div>          
 
-  {% endfor %}
+
 </div>  
 
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "general.html" %}
 
 {% block header %}
+{% load static %}
 
 {% include "header.html" %}
 
@@ -18,5 +19,11 @@
 	{% include 'new_comment_form.html' %}
 </div>	
 
+
+
+{% endblock %}
+
+{% block js_script %}
+<script src="{% static 'town_list.js' %}" ></script>
 
 {% endblock %}

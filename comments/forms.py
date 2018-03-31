@@ -38,14 +38,22 @@ class NewCommentForm(forms.Form):
     	required=False,
     	queryset=Region.objects.all(),
     	empty_label="/Выберите Регион/",
-		widget=forms.Select(attrs={'class': 'form-control'})     	
+		widget=forms.Select(
+            attrs={
+            'class': 'form-control',
+            'id' : 'region_selector'
+            })     	
     	)
 
     town = forms.ModelChoiceField(
     	required=False,
     	queryset=Town.objects.all(),
     	empty_label="/Выберите Город/",
-    	widget=forms.Select(attrs={'class': 'form-control'})   	
+    	widget=forms.Select(
+            attrs={
+            'class': 'form-control d-none',
+            'id' : 'town_selector'
+            })   	
     	)    		       
 
     phone = forms.CharField(
@@ -65,13 +73,13 @@ class NewCommentForm(forms.Form):
     		attrs={
     				'class': 'form-control', 
     				'aria-describedby': 'emailHelp',
-    				'placeholder': 'Enter Email',
+    				'placeholder': 'Введите E-mail',
     				'type': 'email',
     			}),
     	label='Email address', max_length=100)
 
     comment = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Коментарий',
