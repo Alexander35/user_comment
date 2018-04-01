@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from .forms import NewCommentForm
-from .models import Comment, Region, Town, CommentStat
+from .models import Comment, Region, Town, CommentStat, DjangoUserComment
 from django.http import HttpResponse
 
 # Create your views here.
@@ -11,7 +11,8 @@ from django.http import HttpResponse
 def del_comment(request, comment_id):
 	try:	
 		comment = Comment.objects.get(pk=comment_id)
-		if (comment.user == request.user) or (request.user.is_staff):
+		django_user_comment = DjangoUserComment.objects.get(comment=comment)
+		if (django_user_comment.user == request.user) or (request.user.is_staff):
 			comment.visibility = False
 			comment.save()
 
@@ -170,9 +171,17 @@ def new_comment(request):
 	    			patronomic=request.POST['patronomic'],
 	    			phone=request.POST['phone'],
 	    			comment=request.POST['comment'],
-	    			user = request.user,
+	    			# user = request.user,
+	    			visibility = True,
 	    			)
 				comment.save()
+				django_user_comment = DjangoUserComment(
+					user = request.user,
+					comment = comment,
+ 					)
+				django_user_comment.save()
+
+
 
 				inc_stat(region, town)
 
