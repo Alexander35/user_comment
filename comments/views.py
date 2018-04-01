@@ -100,13 +100,15 @@ def regions_stat(request):
 def main(request):
 
 	comments = Comment.objects.filter(visibility=True)
-
+	django_user_comments = DjangoUserComment.objects.all()
+	user_comment_nums = [comment.id for comment in django_user_comments if comment.user == request.user ]
 	return render(
             request,
             'main.html',
             { 
                 'title' : 'Главная',
                 'comments'  : comments,
+                'user_comment_nums' : user_comment_nums,
             }
         )
 

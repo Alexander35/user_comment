@@ -38,7 +38,7 @@
   	<i class="material-icons">description</i>
     {{ comment.comment }}
   </p>
-  {% if user.username == comment.user.username  or request.user.is_staff %}	
+  {% if request.user.is_staff or comment.id in user_comment_nums %}	
   <p class="lead">
     <a type="button" href="{% url 'del_comment' comment.id %}" class="btn btn-danger">Удалить Коментарий</a>
   </p>   
